@@ -29,7 +29,6 @@ TEST(HW1Test, ONES) {
             EXPECT_DOUBLE_EQ(elem, 1);
 }
 
-/*
 TEST(HW1Test, RANDOM1) {
     using ::testing::AllOf;
     using ::testing::Ge;
@@ -52,6 +51,7 @@ TEST(HW1Test, RANDOM1) {
     std::cout << std::endl;
 }
 
+/*
 TEST(HW1Test, RANDOM2) {
     // Caution: min cannot be greater than max
     EXPECT_THROW(algebra::random(3, 4, 4, 2), std::logic_error);

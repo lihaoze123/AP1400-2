@@ -2,10 +2,14 @@
 #define AP_HW1_H
 
 #include <vector>
+#include <random>
+#include <iostream>
+#include <iomanip>
 
-typedef __SIZE_TYPE__ size_t;
-
+using size_t = __SIZE_TYPE__;
 using Matrix = std::vector<std::vector<double>>;
+
+constexpr double _EPS = 1e-6;
 
 namespace algebra {
     // Create a `n x m` matrix with all elements equals to zero.
@@ -13,8 +17,13 @@ namespace algebra {
     
     // Create a `n x m` matrix with all elements equals to one.
     Matrix ones(size_t n, size_t m);
+
+    // Create a `n x m` matrix with all elements a random number between min and max.
     Matrix random(size_t n, size_t m, double min, double max);
+
+    // Display the matrix in a beautiful way.
     void show(const Matrix& matrix);
+
     Matrix multiply(const Matrix& matrix, double c);
     Matrix multiply(const Matrix& matrix1, const Matrix& matrix2);
     Matrix sum(const Matrix& matrix, double c);
