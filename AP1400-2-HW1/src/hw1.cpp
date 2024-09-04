@@ -36,11 +36,9 @@ void show(const Matrix& matrix) {
 Matrix multiply(const Matrix& matrix, double c) {
     Matrix res = matrix;
 
-    for (auto& x : res) {
-        std::transform(x.begin(), x.end(), x.begin(), [c] (const double& y) {
-            return y * c;
-        });
-    }
+    for (auto& x : res) 
+        for (auto& y : x) 
+             y *= c;
 
     return res;
 }
