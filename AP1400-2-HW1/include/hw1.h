@@ -2,15 +2,59 @@
 #define AP_HW1_H
 
 #include <vector>
+#include <iostream>
 #include <random>
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
 
 using size_t = __SIZE_TYPE__;
-using Matrix = std::vector<std::vector<double>>;
 
 constexpr double _EPS = 1e-6;
+
+class Matrix {
+private:
+    std::vector<std::vector<double>> _data;
+
+public:
+    Matrix () = default;
+    Matrix (size_t n, size_t m) : _data(n, std::vector<double>(m)) {}
+    Matrix (size_t n, size_t m, double c) : _data(n, std::vector<double>(m, c)) {}
+    Matrix (const std::vector<std::vector<double>>& data) : _data(data) {}
+    Matrix (std::initializer_list<std::vector<double>> l) : _data(l) {}
+
+    ~Matrix() = default;
+
+    size_t size() const;
+    bool empty() const;
+
+    void show() const;
+
+    std::vector<double>& operator[] (size_t index);
+    const std::vector<double>& operator[] (size_t index) const;
+
+    class Iterator {
+    private:
+        Matrix& matrix;
+        size_t row;
+
+    public:
+        Iterator(Matrix& m, size_t r) : matrix(m), row(r) {}
+
+        std::vector<double>& operator* ();
+        Iterator& operator++ ();
+        Iterator operator++ (int);
+        bool operator!= (const Iterator& other) const;
+    };
+
+    Iterator begin();
+    Iterator end();
+
+    const Iterator begin() const;
+    const Iterator end() const;
+};
+
+std::ostream& operator<< (std::ostream& os, const Matrix& rhs);
 
 namespace algebra {
     // Create a `n x m` matrix with all elements equals to zero.
