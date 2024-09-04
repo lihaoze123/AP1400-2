@@ -16,7 +16,6 @@ TEST(HW1Test, ZEROS) {
             EXPECT_DOUBLE_EQ(elem, 0);
 }
 
-/*
 TEST(HW1Test, ONES) {
     Matrix matrix{algebra::ones(7, 3)};
 
@@ -30,6 +29,7 @@ TEST(HW1Test, ONES) {
             EXPECT_DOUBLE_EQ(elem, 1);
 }
 
+/*
 TEST(HW1Test, RANDOM1) {
     using ::testing::AllOf;
     using ::testing::Ge;
