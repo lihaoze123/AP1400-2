@@ -51,7 +51,6 @@ TEST(HW1Test, RANDOM1) {
     std::cout << std::endl;
 }
 
-/*
 TEST(HW1Test, RANDOM2) {
     // Caution: min cannot be greater than max
     EXPECT_THROW(algebra::random(3, 4, 4, 2), std::logic_error);
@@ -110,6 +109,7 @@ TEST(HW1Test, MULTIPLY4) {
     EXPECT_NEAR(matrix[2][0], 19.3, 0.03);
 }
 
+/*
 TEST(HW1Test, SUM1) {
     // Caution: sum of an empty matrix
     EXPECT_TRUE(algebra::sum(Matrix{}, 1.5).empty());

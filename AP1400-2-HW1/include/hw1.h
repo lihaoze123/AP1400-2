@@ -5,6 +5,7 @@
 #include <random>
 #include <iostream>
 #include <iomanip>
+#include <algorithm>
 
 using size_t = __SIZE_TYPE__;
 using Matrix = std::vector<std::vector<double>>;
@@ -24,8 +25,12 @@ namespace algebra {
     // Display the matrix in a beautiful way.
     void show(const Matrix& matrix);
 
+    // Multiply the `matrix` into the constant scalar `c`
     Matrix multiply(const Matrix& matrix, double c);
+
+    // Multiply the `matrix1` into `matrix2`
     Matrix multiply(const Matrix& matrix1, const Matrix& matrix2);
+
     Matrix sum(const Matrix& matrix, double c);
     Matrix sum(const Matrix& matrix1, const Matrix& matrix2);
     Matrix transpose(const Matrix& matrix);
