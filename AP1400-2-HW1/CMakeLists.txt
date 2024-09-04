@@ -11,6 +11,7 @@ add_executable(main
         src/main.cpp
         src/hw1.cpp
         src/unit_test.cpp
+        src/Matrix.cpp
 )
 target_link_libraries(main
         GTest::GTest
