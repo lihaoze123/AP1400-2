@@ -135,4 +135,34 @@ Matrix concatenate(const Matrix &matrix1, const Matrix &matrix2, int axis) {
     throw std::logic_error("Not a valid axis value!");
 }
 
+Matrix ero_swap(const Matrix &matrix, size_t r1, size_t r2) {
+    Matrix res(matrix);
+
+    auto swap = std::move(res[r1]);
+    res[r1] = std::move(res[r2]);
+    res[r2] = std::move(swap);
+
+    return res;
+}
+
+Matrix ero_multiply(const Matrix &matrix, size_t r, double c) {
+    Matrix res(matrix);
+
+    for (auto &x : res[r])
+        x *= c;
+
+    return res;
+}
+
+Matrix ero_sum(const Matrix &matrix, size_t r1, double c, size_t r2) {
+    size_t m = matrix.innerSize();
+
+    Matrix res(matrix);
+
+    for (size_t i = 0; i < m; ++ i)
+        res[r2][i] += res[r1][i] * c;
+
+    return res;
+}
+
 };

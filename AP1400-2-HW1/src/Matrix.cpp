@@ -39,7 +39,7 @@ Matrix Matrix::minor(size_t n, size_t m) const {
     if (this->empty())
         throw std::logic_error("Empty matrix!");
 
-    if (n > this->size() || m > this->innerSize())
+    if (m >= this->innerSize())
         throw std::logic_error("Out of matrix!");
 
     size_t nn = this->size() - 1, 
@@ -127,10 +127,16 @@ void Matrix::show() const {
 }
 
 std::vector<double>& Matrix::operator[] (size_t index) {
+    if (index >= this->size())
+        throw std::logic_error("Out of matrix!");
+
     return _data[index];
 }
 
 const std::vector<double>& Matrix::operator[] (size_t index) const {
+    if (index >= this->size())
+        throw std::logic_error("Out of matrix!");
+
     return _data[index];
 }
 

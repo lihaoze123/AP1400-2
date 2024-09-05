@@ -107,9 +107,15 @@ namespace algebra {
     // Concatenate matrix1 and matrix2 along the specified axis. (axis=0: on top of each other | axis=1: alongside each other).
     Matrix concatenate(const Matrix& matrix1, const Matrix& matrix2, int axis=0);
 
+    // Elementary row operation, swap `r1` th row with `r2` th.
     Matrix ero_swap(const Matrix& matrix, size_t r1, size_t r2);
+
+    // Elementary row operation, multiply every element in `r` th row with constant number `c`.
     Matrix ero_multiply(const Matrix& matrix, size_t r, double c);
+
+    // Elementary row operation, add `r1` th row x `c` into `r2` th row.
     Matrix ero_sum(const Matrix& matrix, size_t r1, double c, size_t r2);
+
     Matrix upper_triangular(const Matrix& matrix);
 }
 
