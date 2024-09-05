@@ -90,4 +90,28 @@ Matrix transpose(const Matrix& matrix) {
     return matrix.transpose();
 }
 
+Matrix minor(const Matrix &matrix, size_t n, size_t m) {
+    if (matrix.empty())
+        throw std::logic_error("Empty matrix!");
+
+    if (n > matrix.size() || m > matrix.innerSize())
+        throw std::logic_error("Out of matrix!");
+
+    size_t nn = matrix.size() - 1, 
+           mm = matrix.innerSize() - 1;
+
+    Matrix res(nn, mm);
+
+    for (size_t i = 0; i < nn; ++ i) {
+        for (size_t j = 0; j < mm; ++ j) {
+            size_t ii = (i >= n) ? i + 1 : i,
+                   jj = (j >= m) ? j + 1 : j;
+
+            res[i][j] = matrix[ii][jj];
+        }
+    }
+
+    return res;
+}
+
 };

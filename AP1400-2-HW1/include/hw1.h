@@ -91,7 +91,9 @@ namespace algebra {
     // Generate the transpose matrix of the input `matrix`.
     Matrix transpose(const Matrix& matrix);
 
+    // Create the minor of the input `matrix` with respect to nth row and mth column.
     Matrix minor(const Matrix& matrix, size_t n, size_t m);
+
     double determinant(const Matrix& matrix);
     Matrix inverse(const Matrix& matrix);
     Matrix concatenate(const Matrix& matrix1, const Matrix& matrix2, int axis=0);

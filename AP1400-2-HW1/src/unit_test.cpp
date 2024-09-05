@@ -164,7 +164,6 @@ TEST(HW1Test, TRANSPOSE) {
             EXPECT_DOUBLE_EQ(transpose[i][j], matrix[j][i]);
 }
 
-/*
 TEST(HW1Test, MINOR1) {
     Matrix matrix{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
     Matrix minor = algebra::minor(matrix, 1, 2);
@@ -195,6 +194,7 @@ TEST(HW1Test, MINOR2) {
     EXPECT_DOUBLE_EQ(minor[1][1], matrix[2][2]);
 }
 
+/*
 TEST(HW1Test, DETERMINANT1) {
     // Caution: determinant of an empty matrix
     EXPECT_EQ(algebra::determinant(Matrix{}), 1);
