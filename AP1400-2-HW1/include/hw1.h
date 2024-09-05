@@ -2,12 +2,12 @@
 #define AP_HW1_H
 
 #include <vector>
-#include <iostream>
 #include <functional>
 #include <random>
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
+
 
 using size_t = __SIZE_TYPE__;
 
@@ -36,6 +36,9 @@ public:
     void show() const;
 
     Matrix transpose() const;
+    Matrix minor(size_t n, size_t m) const;
+
+    double determinant() const;
 
     std::vector<double>& operator[] (size_t index);
     const std::vector<double>& operator[] (size_t index) const;
@@ -94,7 +97,9 @@ namespace algebra {
     // Create the minor of the input `matrix` with respect to nth row and mth column.
     Matrix minor(const Matrix& matrix, size_t n, size_t m);
 
+    // Calculate the determinant of the input `matrix`.
     double determinant(const Matrix& matrix);
+
     Matrix inverse(const Matrix& matrix);
     Matrix concatenate(const Matrix& matrix1, const Matrix& matrix2, int axis=0);
     Matrix ero_swap(const Matrix& matrix, size_t r1, size_t r2);

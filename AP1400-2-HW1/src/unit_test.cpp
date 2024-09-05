@@ -194,7 +194,6 @@ TEST(HW1Test, MINOR2) {
     EXPECT_DOUBLE_EQ(minor[1][1], matrix[2][2]);
 }
 
-/*
 TEST(HW1Test, DETERMINANT1) {
     // Caution: determinant of an empty matrix
     EXPECT_EQ(algebra::determinant(Matrix{}), 1);
@@ -213,6 +212,7 @@ TEST(HW1Test, DETERMINANT2) {
     EXPECT_DOUBLE_EQ(algebra::determinant(matrix), 0);
 }
 
+/*
 TEST(HW1Test, INVERSE1) {
     // Caution: inverse of an empty matrix
     EXPECT_TRUE(algebra::inverse(Matrix{}).empty());

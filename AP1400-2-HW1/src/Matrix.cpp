@@ -35,6 +35,54 @@ Matrix Matrix::transpose() const {
     return res;
 }
 
+Matrix Matrix::minor(size_t n, size_t m) const {
+    if (this->empty())
+        throw std::logic_error("Empty matrix!");
+
+    if (n > this->size() || m > this->innerSize())
+        throw std::logic_error("Out of matrix!");
+
+    size_t nn = this->size() - 1, 
+           mm = this->innerSize() - 1;
+
+    Matrix res(nn, mm);
+
+    for (size_t i = 0; i < nn; ++ i) {
+        for (size_t j = 0; j < mm; ++ j) {
+            size_t ii = (i >= n) ? i + 1 : i,
+                   jj = (j >= m) ? j + 1 : j;
+
+            res[i][j] = (*this)[ii][jj];
+        }
+    }
+
+    return res;
+}
+
+double Matrix::determinant() const {
+    if (this->empty())
+        return 1;
+
+    size_t n = this->size(), m = this->innerSize();
+
+    if (n != m)
+        throw std::logic_error("Not a square matrix!");
+
+    if (n == 1 && m == 1)
+        return _data[0][0];
+
+    double res = 0;
+    
+    for (size_t i = 0; i < n; ++ i) {
+        auto minor = this->minor(i, 0);
+        int sign = i & 1 ? -1 : 1;
+
+        res += sign * (*this)[i][0] * minor.determinant();
+    }
+
+    return res;
+}
+
 std::ostream& operator<< (std::ostream& os, const Matrix& rhs) {
     os << std::fixed << std::setprecision(3);
 
