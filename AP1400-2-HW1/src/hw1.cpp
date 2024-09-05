@@ -12,9 +12,8 @@ Matrix ones(size_t n, size_t m) {
 }
 
 Matrix random(size_t n, size_t m, double min, double max) {
-    if (min > max) {
+    if (min > max) 
         throw std::logic_error("min is bigger than max");
-    }
 
     std::random_device rd; 
     std::mt19937 gen(rd());
@@ -40,19 +39,17 @@ Matrix multiply(const Matrix& matrix, double c) {
 }
 
 Matrix multiply(const Matrix& matrix1, const Matrix& matrix2) {
-    size_t n1 = matrix1.size(),
+    size_t n1 = matrix1.size(), 
            n2 = matrix2.size();
 
-    if (n1 == 0 || n2 == 0) {
+    if (n1 == 0 || n2 == 0) 
         return Matrix();
-    }
 
-    int m1 = matrix1[0].size(),
-        m2 = matrix2[0].size();
+    size_t m1 = matrix1.innerSize(),
+           m2 = matrix2.innerSize();
 
-    if (m1 != n2) {
-        throw std::logic_error("matrix not matched");
-    }
+    if (m1 != n2) 
+        throw std::logic_error("Matrix not matched!");
 
     auto res = zeros(n1, m2);
 
@@ -63,4 +60,30 @@ Matrix multiply(const Matrix& matrix1, const Matrix& matrix2) {
 
     return res;
 }
+
+Matrix sum(const Matrix& matrix, double c) {
+    Matrix res(matrix);
+
+    for (auto &x : res) 
+        for (auto &y : x)
+            y += c;
+
+    return res;
+}
+
+Matrix sum(const Matrix& matrix1, const Matrix& matrix2) {
+    if (matrix1.size() != matrix2.size() || matrix1.innerSize() != matrix2.innerSize())
+        throw std::logic_error("Matrix not matched!");
+
+    size_t n = matrix1.size(), m = matrix1.innerSize();
+
+    Matrix res(matrix1);
+    
+    for (size_t i = 0; i < n; ++ i)
+        for (size_t j = 0; j < m; ++ j)
+            res[i][j] +=  matrix2[i][j];
+
+    return res;
+}
+
 };

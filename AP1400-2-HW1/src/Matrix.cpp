@@ -16,6 +16,13 @@ bool Matrix::empty() const {
     return _data.empty();
 }
 
+size_t Matrix::innerSize() const {
+    if (_data.empty())
+        return 0;
+
+    return _data[0].size();
+}
+
 std::ostream& operator<< (std::ostream& os, const Matrix& rhs) {
     os << std::fixed << std::setprecision(3);
 

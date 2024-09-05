@@ -31,6 +31,7 @@ public:
 
     size_t size() const;
     bool empty() const;
+    size_t innerSize() const;
 
     void show() const;
 
@@ -73,14 +74,18 @@ namespace algebra {
     // Display the matrix in a beautiful way.
     void show(const Matrix& matrix);
 
-    // Multiply the `matrix` into the constant scalar `c`
+    // Multiply the `matrix` into the constant scalar `c`.
     Matrix multiply(const Matrix& matrix, double c);
 
-    // Multiply the `matrix1` into `matrix2`
+    // Multiply the `matrix1` into `matrix2`.
     Matrix multiply(const Matrix& matrix1, const Matrix& matrix2);
 
+    // Add the constant number `c` to every elements of `matrix`.
     Matrix sum(const Matrix& matrix, double c);
+
+    // Add 2 matrices to each other.
     Matrix sum(const Matrix& matrix1, const Matrix& matrix2);
+
     Matrix transpose(const Matrix& matrix);
     Matrix minor(const Matrix& matrix, size_t n, size_t m);
     double determinant(const Matrix& matrix);
