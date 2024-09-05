@@ -86,4 +86,8 @@ Matrix sum(const Matrix& matrix1, const Matrix& matrix2) {
     return res;
 }
 
+Matrix transpose(const Matrix& matrix) {
+    return matrix.transpose();
+}
+
 };

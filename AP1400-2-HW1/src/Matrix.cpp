@@ -23,6 +23,18 @@ size_t Matrix::innerSize() const {
     return _data[0].size();
 }
 
+Matrix Matrix::transpose() const {
+    size_t n = this->size(), m = this->innerSize();
+
+    Matrix res(m, n);
+
+    for (size_t i = 0; i < m; ++ i) 
+        for (size_t j = 0; j < n; ++ j)
+            res[i][j] = (*this)[j][i];
+
+    return res;
+}
+
 std::ostream& operator<< (std::ostream& os, const Matrix& rhs) {
     os << std::fixed << std::setprecision(3);
 

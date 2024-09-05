@@ -35,6 +35,8 @@ public:
 
     void show() const;
 
+    Matrix transpose() const;
+
     std::vector<double>& operator[] (size_t index);
     const std::vector<double>& operator[] (size_t index) const;
 
@@ -86,7 +88,9 @@ namespace algebra {
     // Add 2 matrices to each other.
     Matrix sum(const Matrix& matrix1, const Matrix& matrix2);
 
+    // Generate the transpose matrix of the input `matrix`.
     Matrix transpose(const Matrix& matrix);
+
     Matrix minor(const Matrix& matrix, size_t n, size_t m);
     double determinant(const Matrix& matrix);
     Matrix inverse(const Matrix& matrix);

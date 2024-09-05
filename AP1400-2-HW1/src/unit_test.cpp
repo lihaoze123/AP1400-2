@@ -147,7 +147,6 @@ TEST(HW1Test, SUM2) {
             EXPECT_NEAR(sum[i][j], matrix1[i][j]+matrix2[i][j], 0.03);
 }
 
-/*
 TEST(HW1Test, TRANSPOSE) {
     // Caution: transpose of an empty matrix is an empty matrix
     EXPECT_TRUE(algebra::transpose(Matrix{}).empty());
@@ -165,6 +164,7 @@ TEST(HW1Test, TRANSPOSE) {
             EXPECT_DOUBLE_EQ(transpose[i][j], matrix[j][i]);
 }
 
+/*
 TEST(HW1Test, MINOR1) {
     Matrix matrix{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
     Matrix minor = algebra::minor(matrix, 1, 2);
