@@ -20,11 +20,7 @@ Matrix random(size_t n, size_t m, double min, double max) {
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> distrib(min, max - _EPS);
 
-    Matrix res(n, m);
-
-    for (auto& x : res) 
-        for (auto& y : x) 
-            y = distrib(gen);
+    Matrix res(n, m, std::bind(distrib, gen));
 
     return res;
 }

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <iostream>
+#include <functional>
 #include <random>
 #include <iostream>
 #include <iomanip>
@@ -20,6 +21,9 @@ public:
     Matrix () = default;
     Matrix (size_t n, size_t m) : _data(n, std::vector<double>(m)) {}
     Matrix (size_t n, size_t m, double c) : _data(n, std::vector<double>(m, c)) {}
+
+    Matrix (size_t n, size_t m, std::function<double()> f);
+
     Matrix (const std::vector<std::vector<double>>& data) : _data(data) {}
     Matrix (std::initializer_list<std::vector<double>> l) : _data(l) {}
 

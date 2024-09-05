@@ -1,5 +1,13 @@
 #include "hw1.h"
 
+Matrix::Matrix (size_t n, size_t m, std::function<double()> f) {
+    *this = Matrix(n, m);
+
+    for (auto &x : _data) 
+        for (auto &y : x) 
+            y = f();
+}
+
 size_t Matrix::size() const {
     return _data.size();
 }
