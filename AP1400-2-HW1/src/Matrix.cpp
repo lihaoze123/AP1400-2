@@ -83,6 +83,33 @@ double Matrix::determinant() const {
     return res;
 }
 
+Matrix Matrix::inv() const {
+    if (this->empty())
+        return Matrix();
+
+    if (this->determinant() == 0)
+        throw std::logic_error("Don't have a inv matrix!");
+
+    size_t n = this->size(), m = this->innerSize();
+
+    Matrix C(n, m);
+
+    for (size_t i = 0; i < n; ++ i) {
+        for (size_t j = 0; j < m; ++ j) {
+            auto minor = this->minor(i, j); 
+            int sign = (i + j) & 1 ? -1 : 1;
+
+            C[i][j] = sign * minor.determinant();
+        }
+    }
+
+    auto adj = C.transpose();
+    auto det = this->determinant();
+
+    auto res = algebra::multiply(adj, 1 / det);
+    return res;
+}
+
 std::ostream& operator<< (std::ostream& os, const Matrix& rhs) {
     os << std::fixed << std::setprecision(3);
 

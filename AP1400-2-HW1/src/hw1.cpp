@@ -98,4 +98,8 @@ double determinant(const Matrix &matrix) {
     return matrix.determinant();
 }
 
+Matrix inverse(const Matrix &matrix) {
+    return matrix.inv();
+}
+
 };

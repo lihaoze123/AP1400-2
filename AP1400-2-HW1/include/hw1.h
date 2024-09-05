@@ -37,6 +37,7 @@ public:
 
     Matrix transpose() const;
     Matrix minor(size_t n, size_t m) const;
+    Matrix inv() const;
 
     double determinant() const;
 
@@ -100,7 +101,9 @@ namespace algebra {
     // Calculate the determinant of the input `matrix`.
     double determinant(const Matrix& matrix);
 
+    // Calculate the inverse of a `n x n` matrix;
     Matrix inverse(const Matrix& matrix);
+
     Matrix concatenate(const Matrix& matrix1, const Matrix& matrix2, int axis=0);
     Matrix ero_swap(const Matrix& matrix, size_t r1, size_t r2);
     Matrix ero_multiply(const Matrix& matrix, size_t r, double c);
