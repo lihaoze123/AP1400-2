@@ -102,4 +102,37 @@ Matrix inverse(const Matrix &matrix) {
     return matrix.inv();
 }
 
+Matrix concatenate(const Matrix &matrix1, const Matrix &matrix2, int axis) {
+    if (matrix1.empty() && matrix2.empty())
+        return Matrix();
+
+    size_t n1 = matrix1.size(), n2 = matrix2.size(),
+           m1 = matrix1.innerSize(), m2 = matrix2.innerSize();
+
+    if (axis) {
+        if (n1 != n2)
+            throw std::logic_error("Matrix not matched!");
+
+        Matrix res(matrix1);
+        for (size_t i = 0; i < n1; ++ i)
+            res[i].insert(res[i].end(), matrix2[i].begin(), matrix2[i].end());
+
+        return res;
+    } else {
+        if (m1 != m2)
+            throw std::logic_error("Matrix not matched!");
+
+        Matrix res(n1 + n2, 0);
+
+        for (size_t i = 0; i < n1; ++ i)
+            res[i] = matrix1[i];
+        for (size_t i = 0; i < n2; ++ i)
+            res[i + n1] = matrix2[i];
+
+        return res;
+    }
+
+    throw std::logic_error("Not a valid axis value!");
+}
+
 };
