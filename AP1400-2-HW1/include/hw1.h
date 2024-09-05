@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <algorithm>
 
+#define ABS(__x) (__x < 0 ? -__x : __x)
 
 using size_t = __SIZE_TYPE__;
 
@@ -38,6 +39,7 @@ public:
     Matrix transpose() const;
     Matrix minor(size_t n, size_t m) const;
     Matrix inv() const;
+    Matrix upper_triangular() const;
 
     double determinant() const;
 

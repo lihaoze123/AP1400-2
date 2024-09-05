@@ -110,6 +110,35 @@ Matrix Matrix::inv() const {
     return res;
 }
 
+Matrix Matrix::upper_triangular() const {
+    size_t n = this->size(), m = this->innerSize();
+
+    if (n != m)
+        throw std::logic_error("Not a square matrix!");
+
+    Matrix res(*this);
+
+    for (size_t j = 0; j < m; ++ j) {
+        if (ABS(res[j][j]) <= _EPS) {
+            for (size_t i = j + 1; i < n; ++ i) {
+                if (ABS(res[i][j]) > _EPS) {
+                    res = algebra::ero_swap(res, i, j);
+                    break;
+                }
+            }
+        }
+
+        for (size_t i = j + 1; i < n; ++ i) {
+            if (ABS(res[i][j]) > _EPS) {
+                double factor = - res[i][j] / res[j][j]; 
+                res = algebra::ero_sum(res, j, factor, i);
+            }
+        }
+    }
+
+    return res;
+}
+
 std::ostream& operator<< (std::ostream& os, const Matrix& rhs) {
     os << std::fixed << std::setprecision(3);
 
