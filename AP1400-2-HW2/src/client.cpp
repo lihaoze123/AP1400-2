@@ -19,3 +19,12 @@ std::string Client::get_publickey() const {
 double Client::get_wallet() {
     return server->get_wallet(id);
 }
+
+std::string Client::sign(std::string txt) const {
+    return crypto::signMessage(private_key, txt);
+}
+
+bool Client::transfer_money(std::string receiver, double value) {
+    auto trx = id + '-' + receiver + '-' + std::to_string(value);
+    return server->add_pending_trx(trx, sign(trx));
+}

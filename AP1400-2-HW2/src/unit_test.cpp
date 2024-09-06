@@ -63,7 +63,6 @@ TEST(HW1Test, TEST8) {
     show_wallets(server);
 }
 
-/*
 TEST(HW1Test, TEST9) {
     Server server{};
     auto bryan{server.add_client("bryan")};
@@ -121,6 +120,7 @@ TEST(HW1Test, TEST14) {
     std::cout  <<  std::string(20, '*') <<  std::endl;
 }
 
+/*
 TEST(HW1Test, TEST15) {
     Server server{};
     pending_trxs.clear();

@@ -7,6 +7,7 @@
 #include <random>
 #include <sstream>
 #include <iomanip>
+#include <algorithm>
 
 class Client;
 #include <client.h>
@@ -24,13 +25,18 @@ public:
     // Using this function will return the wallet value of the client with username id.
 	double get_wallet(std::string id) const;
 
-	bool parse_trx(std::string trx, std::string sender, std::string receiver, double value);
-	bool add_pending_trx(std::string trx, std::string signature);
+    // Each transaction has 3 properties: i) id of the sender ii) id of the receiver iii) value of money to transfer. We will show each transaction with a string, concatenating each of these properties with a -. For example if ali sends 1.5 coins to hamed the transaction will be shown by a string "ali-hamed-1.5". This function will parse this string format and outputting each property separately, if the string is not standard you should throw a runtime error.
+	static bool parse_trx(std::string trx, std::string& sender, std::string& receiver, double& value);
+
+    // Each Client can add a pending transaction using the transaction format described in the above section. Only accept a pending transaction by authenticating the sender's signature and if he has enough money in his wallet.
+	bool add_pending_trx(std::string trx, std::string signature) const;
+
 	size_t mine();
 private:
 	std::map<std::shared_ptr<Client>, double> clients;
 };
 
+extern std::vector<std::string> pending_trxs;
 
 std::string random_str(size_t w);
 void show_wallets(const Server& server);

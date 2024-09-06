@@ -2,6 +2,9 @@
 
 #include <iostream>
 
+std::vector<std::string> pending_trxs;
+
+
 std::string random_str(size_t w) {
     int upper_bound = 1, ww = w;
     while (ww --)
@@ -66,4 +69,45 @@ double Server::get_wallet(std::string id) const {
         return 0;
     else 
         return clients.at(client);
+}
+
+bool Server::parse_trx(std::string trx, std::string& sender, std::string& receiver, double& value) {
+    std::replace(trx.begin(), trx.end(), '-', ' ');
+    std::stringstream ss(trx);
+
+    ss >> sender;
+    if (!ss.good())
+        throw std::runtime_error("Not a valid transaction!");
+
+    ss >> receiver;
+    if (!ss.good())
+        throw std::runtime_error("Not a valid transaction!");
+
+    ss >> value;
+    if (!ss.eof())
+        throw std::runtime_error("Not a valid transaction!");
+
+    return true;
+}
+
+bool Server::add_pending_trx(std::string trx, std::string signature) const {
+    std::string sender, receiver;
+    double value;
+
+    Server::parse_trx(trx, sender, receiver, value);
+
+    auto sender_ptr = get_client(sender),
+         receiver_ptr = get_client(receiver);
+
+    if (receiver_ptr == nullptr)
+        return false;
+
+    auto public_key = sender_ptr->get_publickey();
+    auto wallet = sender_ptr->get_wallet();
+
+    if (!crypto::verifySignature(public_key, trx, signature) || wallet < value)
+        return false;
+    
+    pending_trxs.push_back(trx);
+    return true;
 }
