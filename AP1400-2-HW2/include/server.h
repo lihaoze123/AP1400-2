@@ -33,5 +33,6 @@ private:
 
 
 std::string random_str(size_t w);
+void show_wallets(const Server& server);
 
 #endif //SERVER_H

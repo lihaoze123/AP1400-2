@@ -22,6 +22,16 @@ std::string random_str(size_t w) {
     return res;
 }
 
+void show_wallets(const Server &server) {
+    // A hack way to access private member of `server`, may cause undefined behavior.
+    auto clients = *((std::map<std::shared_ptr<Client>, double>*)(&server));
+    
+    std::cout << std::string('*', 20) << '\n';
+    for (const auto& [k, v] : clients) 
+        std::cout << k->get_id() << " : " << v << '\n';
+    std::cout << std::string('*', 20) << '\n';
+}
+
 std::shared_ptr<Client> Server::get_client(std::string id) const {
     Client cmp{id, Server{}};
     auto lower_bound = clients.lower_bound(std::make_shared<Client>(cmp));
