@@ -4,7 +4,6 @@
 #include "server.h"
 #include "client.h"
 
-/*
 TEST(HW1Test, TEST1) {
     Server server{};
     auto bryan{server.add_client("bryan")};
@@ -34,6 +33,7 @@ TEST(HW1Test, TEST4) {
     EXPECT_NE(bryan2->get_id(), bryan3->get_id());
 }
 
+/*
 TEST(HW1Test, TEST5) {
     Server server{};
     auto bryan{server.add_client("bryan")};

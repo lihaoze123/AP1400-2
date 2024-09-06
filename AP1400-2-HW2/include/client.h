@@ -4,11 +4,12 @@
 #include <string>
 
 class Server;
+#include <server.h>
 
 class Client {
 public:
 	Client(std::string id, const Server& server);
-	std::string get_id();
+	std::string get_id() const;
 	std::string get_publickey();
 	double get_wallet();
 	std::string sign(std::string txt);
@@ -20,5 +21,7 @@ private:
 	std::string public_key;
 	std::string private_key;
 };
+
+bool operator < (const std::shared_ptr<Client>& lhs, const std::shared_ptr<Client>& rhs);
 
 #endif //CLIENT_H
