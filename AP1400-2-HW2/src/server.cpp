@@ -4,8 +4,7 @@
 
 std::vector<std::string> pending_trxs;
 
-
-std::string random_str(size_t w) {
+int random_int(size_t w) {
     int upper_bound = 1, ww = w;
     while (ww --)
         upper_bound *= 10;
@@ -15,9 +14,13 @@ std::string random_str(size_t w) {
     std::mt19937 gen(id());
     std::uniform_int_distribution<> distrib(0, upper_bound);
 
+    return distrib(gen);
+}
+
+std::string random_str(size_t w) {
     std::stringstream ss;
     ss << std::setw(w) << std::setfill('0');
-    ss << distrib(gen);
+    ss << random_int(w);
 
     std::string res;
     ss >> res;
@@ -110,4 +113,39 @@ bool Server::add_pending_trx(std::string trx, std::string signature) const {
     
     pending_trxs.push_back(trx);
     return true;
+}
+
+size_t Server::mine() {
+    std::stringstream mempool;
+    
+    for (const auto& trx : pending_trxs)
+        mempool << trx;
+
+    while (true) {
+        for (const auto& [client, _] : clients) {
+            size_t nonce = client->generate_nonce();
+            auto hash = crypto::sha256(mempool.str() + std::to_string(nonce));
+
+            if (hash.substr(0, 10).find("0000") != std::string::npos) {
+                clients[client] += 6.25;
+                std::cout << client->get_id() << '\n';
+
+                for (const auto& trx : pending_trxs) {
+                    std::string sender, receiver;
+                    double value;
+
+                    Server::parse_trx(trx, sender, receiver, value);
+
+                    auto sender_ptr = get_client(sender),
+                         receiver_ptr = get_client(receiver);
+
+                    clients[sender_ptr] -= value,
+                    clients[receiver_ptr] += value;
+                }
+
+                pending_trxs.clear();
+                return nonce;
+            }
+        }
+    }
 }

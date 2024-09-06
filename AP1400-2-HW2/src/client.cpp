@@ -28,3 +28,7 @@ bool Client::transfer_money(std::string receiver, double value) {
     auto trx = id + '-' + receiver + '-' + std::to_string(value);
     return server->add_pending_trx(trx, sign(trx));
 }
+
+size_t Client::generate_nonce() {
+    return random_int(5);
+}

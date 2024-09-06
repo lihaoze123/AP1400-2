@@ -38,6 +38,7 @@ private:
 
 extern std::vector<std::string> pending_trxs;
 
+int random_int(size_t w);
 std::string random_str(size_t w);
 void show_wallets(const Server& server);
 
