@@ -50,3 +50,7 @@ bool operator >= (const Node& lhs, int rhs) {
 bool operator <= (const Node& lhs, int rhs) {
     return (lhs < rhs) || (lhs == rhs);
 }
+
+Node*& BST::get_root() {
+    return root;
+}
