@@ -46,7 +46,6 @@ TEST(HW3Test, TEST4) {
     std::cout << std::string(80, '*') << std::endl;
 }
 
-/*
 TEST(HW3Test, TEST5) {
     BST::Node node{5, nullptr, nullptr};
 
@@ -74,6 +73,7 @@ TEST(HW3Test, TEST5) {
 
 }
 
+/*
 TEST(HW3Test, TEST6) {
     BST bst{};
     EXPECT_EQ(bst.get_root(), nullptr);

@@ -4,6 +4,7 @@
 #include <functional>
 #include <iostream>
 #include <format>
+#include <compare>
 
 class BST {
 public:
@@ -34,5 +35,17 @@ private:
 using Node = BST::Node;
 
 std::ostream& operator << (std::ostream& os, const Node& node);
+
+bool operator < (int lhs, const Node& rhs);
+bool operator > (int lhs, const Node& rhs);
+bool operator == (int lhs, const Node& rhs);
+bool operator >= (int lhs, const Node& rhs);
+bool operator <= (int lhs, const Node& rhs);
+
+bool operator < (const Node& lhs, int rhs);
+bool operator > (const Node& lhs, int rhs);
+bool operator == (const Node& lhs, int rhs);
+bool operator >= (const Node& lhs, int rhs);
+bool operator <= (const Node& lhs, int rhs);
 
 #endif //BST_H
