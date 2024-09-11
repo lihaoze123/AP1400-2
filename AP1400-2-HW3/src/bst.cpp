@@ -96,3 +96,21 @@ bool BST::add_node(int value) {
     return true;
 }
 
+void BST::bfs(std::function<void(Node*& node)> func) {
+    auto root = get_root();
+
+    std::queue<Node*> q;
+    q.push(root); 
+
+    while (q.size()) {
+        auto t = q.front();
+        q.pop();
+
+        func(t);
+
+        if (t->left != nullptr)
+            q.push(t->left);
+        if (t->right != nullptr)
+            q.push(t->right);
+    }
+}

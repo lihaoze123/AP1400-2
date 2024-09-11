@@ -5,6 +5,7 @@
 #include <iostream>
 #include <format>
 #include <compare>
+#include <queue>
 
 class BST {
 public:
