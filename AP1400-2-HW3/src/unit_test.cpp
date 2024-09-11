@@ -121,7 +121,6 @@ TEST(HW3Test, TEST9) {
     EXPECT_TRUE(std::find(values.begin(), values.end(), 53) != values.end());
 }
 
-/*
 TEST(HW3Test, TEST10) {
     BST bst{};
     bst.add_node(25);
@@ -175,6 +174,7 @@ TEST(HW3Test, TEST13) {
     EXPECT_EQ(node, nullptr);
 }
 
+/*
 TEST(HW3Test, TEST14) {
     BST bst{};
     bst.add_node(25);

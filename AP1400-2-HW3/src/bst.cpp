@@ -99,18 +99,42 @@ bool BST::add_node(int value) {
 void BST::bfs(std::function<void(Node*& node)> func) {
     auto root = get_root();
 
-    std::queue<Node*> q;
-    q.push(root); 
+    std::queue<Node**> q;
+    q.push(&root); 
 
-    while (q.size()) {
-        auto t = q.front();
-        q.pop();
+    while (q.size()) { 
+        auto t = q.front(); 
+        q.pop(); 
 
-        func(t);
+        func(*t);
 
-        if (t->left != nullptr)
-            q.push(t->left);
-        if (t->right != nullptr)
-            q.push(t->right);
+        if ((*t)->left != nullptr)
+            q.push(&(*t)->left);
+        if ((*t)->right != nullptr)
+            q.push(&(*t)->right);
     }
+}
+
+size_t BST::length() {
+    size_t res = 0;
+    bfs([&res] (Node*& node) { ++ res; });
+
+    return res;
+}
+
+std::ostream& operator << (std::ostream& os, BST& bst) {
+    bst.bfs([&os] (Node*& node) { os << node->value << ' '; });
+
+    return os;
+}
+
+Node** BST::find_node(int value) {
+    Node** res = nullptr;
+    bfs([&res, value] (Node*& node) {
+        if (node->value == value) {
+            res = &node;
+        }
+    });
+
+    return res;
 }

@@ -36,6 +36,7 @@ private:
 using Node = BST::Node;
 
 std::ostream& operator << (std::ostream& os, const Node& node);
+std::ostream& operator << (std::ostream& os, BST& bst);
 
 bool operator < (int lhs, const Node& rhs);
 bool operator > (int lhs, const Node& rhs);
