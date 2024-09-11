@@ -129,12 +129,110 @@ std::ostream& operator << (std::ostream& os, BST& bst) {
 }
 
 Node** BST::find_node(int value) {
-    Node** res = nullptr;
-    bfs([&res, value] (Node*& node) {
-        if (node->value == value) {
-            res = &node;
-        }
-    });
+    auto fa = &get_root(), p = &get_root();
+    bool flag = false;
 
-    return res;
+    auto cmp = [value] (int lhs, Node *rhs) {
+        if (rhs == nullptr || value == *rhs) {
+            return 0;
+        } else if (lhs < *rhs) {
+            return -1;
+        } else {
+            return 1;
+        }
+    };
+
+    while (cmp(value, *p)) {
+        if (cmp(value, *p) < 0) 
+            fa = p, p = &(*p)->left, flag = false;
+        if (cmp(value, *p) > 0) 
+            fa = p, p = &(*p)->right, flag = true;
+    }
+
+    if (*p == nullptr)
+        return nullptr;
+    if ((*p)->value == value)
+        return p;
+
+    return nullptr;
+}
+
+Node** BST::find_parrent(int value) {
+    auto fa = &get_root(), p = &get_root();
+    bool flag = false;
+
+    auto cmp = [value] (int lhs, Node *rhs) {
+        if (rhs == nullptr || value == *rhs) {
+            return 0;
+        } else if (lhs < *rhs) {
+            return -1;
+        } else {
+            return 1;
+        }
+    };
+
+    while (cmp(value, *p)) {
+        if (cmp(value, *p) < 0) 
+            fa = p, p = &(*p)->left, flag = false;
+        if (cmp(value, *p) > 0) 
+            fa = p, p = &(*p)->right, flag = true;
+    }
+
+    if (*p == nullptr)
+        return nullptr;
+    if ((*p)->value == value)
+        return fa;
+
+    return nullptr;
+}
+
+// dont know why, but this function is used to find predecessor
+Node** BST::find_successor(int value) {
+    auto p = &(*find_node(value))->left;
+
+    if ((*p) == nullptr)
+        return nullptr;
+
+    while ((*p)->right != nullptr)
+        p = &(*p)->right;
+
+    return p;
+}
+
+// find real successor
+Node** find_successor(BST* bst, int value) {
+    auto p = &(*bst->find_node(value))->right;
+
+    if ((*p) == nullptr)
+        return nullptr;
+
+    while ((*p)->left != nullptr)
+        p = &(*p)->left;
+
+    return p;
+}
+
+bool BST::delete_node(int value) {
+    auto p = find_node(value);
+    
+    if (p == nullptr)
+        return false;
+
+    auto left = (*p)->left, right = (*p)->right;
+
+    if (left == nullptr) {
+        delete *p;
+        *p = right;
+    } else if (right == nullptr) {
+        delete *p;
+        *p = left;
+    } else {
+        auto succ = find_successor(value);
+        (*p)->value = (*succ)->value;
+
+        delete (*succ);
+        *succ = nullptr;
+    }
+
+    return true;
 }

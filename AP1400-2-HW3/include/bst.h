@@ -50,4 +50,6 @@ bool operator == (const Node& lhs, int rhs);
 bool operator >= (const Node& lhs, int rhs);
 bool operator <= (const Node& lhs, int rhs);
 
+Node** find_successor(BST* bst, int value);
+
 #endif //BST_H
