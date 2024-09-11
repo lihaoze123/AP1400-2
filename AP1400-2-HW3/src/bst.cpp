@@ -1,10 +1,68 @@
 #include "bst.h"
 
+BST::BST() : root(nullptr) {}
+
+BST::BST(std::initializer_list<int> values) : root(nullptr) {
+    for (auto x : values)
+        add_node(x);
+}
+
+// copy
+static void copy_BST(const Node* src, Node*& dest) {
+    if (src != nullptr) {
+        dest = new Node{src->value, nullptr, nullptr};
+        copy_BST(src->left, dest->left);
+        copy_BST(src->right, dest->right);
+    }
+}
+
+BST::BST(const BST& bst) {
+    if (bst.get_root() != nullptr) 
+        copy_BST(bst.get_root(), get_root());
+}
+
+BST& BST::operator = (const BST& bst) {
+	auto bst2 = new BST(bst);
+	this->~BST();
+	root = bst2->root;
+	return *this;
+}
+
+// move
+BST::BST(BST&& bst) {
+    root = bst.root;
+    bst.root = nullptr;
+}
+
+BST& BST::operator = (BST&& bst) {
+	if (this != &bst) {
+		this->~BST();
+		root = bst.root;
+		bst.root = nullptr;
+	}
+	return *this;
+}
+
+BST& BST::operator ++ () {
+    bfs([] (Node*& node) {
+        ++node->value;
+    });
+
+    return *this;
+}
+
+BST BST::operator ++ (int) {
+    auto tmp = *this;
+
+    ++(*this);
+
+    return tmp;
+}
+
 Node::Node() : value(0), left(nullptr), right(nullptr) {}
 Node::Node(int value, Node* left, Node* right) : value(value), left(left), right(right) {}
-Node::Node(const Node& node) {
-    *this = node;
-}
+Node::Node(const Node& node) { *this = node; }
+Node::Node(Node& node) { *this = std::move(node); }
 
 std::ostream& operator << (std::ostream& os, const Node& node) {
     os << std::format("{{ value: {0} -> {{ left.value: {1}, right.value: {2} }} }}", node.value, node.left->value, node.right->value); 
@@ -52,6 +110,10 @@ bool operator <= (const Node& lhs, int rhs) {
 }
 
 Node*& BST::get_root() {
+    return root;
+}
+
+const Node* BST::get_root() const {
     return root;
 }
 

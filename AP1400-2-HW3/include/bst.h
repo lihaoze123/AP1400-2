@@ -14,13 +14,26 @@ public:
         Node(int value, Node* left, Node* right);
         Node();
         Node(const Node& node);
+        Node(Node& node);
 
         int value;
         Node* left;
         Node* right;
     };
 
+    BST();
+    BST(const BST& bst);
+    BST(BST&& bst);
+    BST(std::initializer_list<int> values);
+
+    BST& operator = (const BST& bst);
+    BST& operator = (BST&& bst);
+
+    BST& operator ++ ();
+    BST operator ++ (int);
+
     Node*& get_root();
+    const Node* get_root() const;
     void bfs(std::function<void(Node*& node)> func);
     size_t length();
     bool add_node(int value);
@@ -51,5 +64,7 @@ bool operator >= (const Node& lhs, int rhs);
 bool operator <= (const Node& lhs, int rhs);
 
 Node** find_successor(BST* bst, int value);
+
+static void copy_BST(const Node* src, Node*& dest);
 
 #endif //BST_H
