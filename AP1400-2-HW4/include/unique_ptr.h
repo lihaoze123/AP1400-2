@@ -13,6 +13,14 @@ public:
     T* get() {
         return _p;
     }
+
+    T& operator * () {
+        return *_p;
+    }
+
+    T* operator -> () {
+        return _p;
+    }
 };
 
 template <typename T>
