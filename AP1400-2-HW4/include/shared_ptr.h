@@ -20,7 +20,14 @@ public:
         ++ (*_use);
     }
 
-    SharedPtr& operator=(const SharedPtr& shared_ptr) = default;
+    SharedPtr& operator=(const SharedPtr& shared_ptr) {
+        if (this != &shared_ptr) {
+            _p = shared_ptr.get();
+            _use = &shared_ptr.use_count();
+            ++ (*_use);
+        }
+        return *this;
+    }
 
     ~SharedPtr() {
         if (_use != nullptr && -- (*_use) == 0) {
