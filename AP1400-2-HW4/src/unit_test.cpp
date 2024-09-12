@@ -7,7 +7,6 @@
 #include "unique_ptr.h"
 #include "shared_ptr.h"
 
-/*
 TEST(HW4Test, TEST1) {
     UniquePtr<int> ptr1{new int{10}};
     EXPECT_EQ(*ptr1.get(), 10);
@@ -32,6 +31,7 @@ TEST(HW4Test, TEST3) {
     EXPECT_EQ(ptr2.get(), nullptr);
 }
 
+/*
 TEST(HW4Test, TEST4) {
     UniquePtr<int> ptr1{new int{10}};
     EXPECT_EQ(*ptr1, 10);
