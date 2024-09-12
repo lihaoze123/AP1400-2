@@ -8,24 +8,28 @@ private:
 
 public:
     UniquePtr() = default;
-    UniquePtr(T* _p): _p(_p) {}
+    UniquePtr(T* _p) : _p(_p) {}
 
-    T* get() {
-        return _p;
+    ~UniquePtr() {
+        delete _p;
+        _p = nullptr;
     }
 
-    T& operator * () {
-        return *_p;
+    T* get() const { return _p; }
+    T& operator*() const { return *_p; }
+    T* operator->() const { return &this->operator*(); }
+
+    void reset(T* ptr = nullptr) {
+        delete _p;
+        _p = ptr;
     }
 
-    T* operator -> () {
-        return _p;
-    }
+    operator bool() const { return nullptr != _p; }
 };
 
 template <typename T>
-UniquePtr<T> make_unique(T&& _p) {
-    return UniquePtr<T>{&_p};
+UniquePtr<T> make_unique(T&& t) {
+    return UniquePtr<T>{new T{t}};
 }
 
-#endif //UNIQUE_PTR
+#endif  // UNIQUE_PTR
