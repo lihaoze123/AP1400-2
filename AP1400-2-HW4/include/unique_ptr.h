@@ -10,6 +10,9 @@ public:
     UniquePtr() = default;
     UniquePtr(T* _p) : _p(_p) {}
 
+    UniquePtr(const UniquePtr& unique_ptr) = delete;
+    UniquePtr& operator=(const UniquePtr& unique_ptr) = delete;
+
     ~UniquePtr() {
         delete _p;
         _p = nullptr;
@@ -22,6 +25,12 @@ public:
     void reset(T* ptr = nullptr) {
         delete _p;
         _p = ptr;
+    }
+
+    T* release() {
+        auto tmp = _p;
+        _p = nullptr;
+        return tmp;
     }
 
     operator bool() const { return nullptr != _p; }

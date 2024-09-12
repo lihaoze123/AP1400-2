@@ -64,7 +64,6 @@ TEST(HW4Test, TEST7) {
     EXPECT_EQ(*ptr, "nice job!");
 }
 
-/*
 TEST(HW4Test, TEST8) {
     UniquePtr<double> ptr{new double{1.567}};
     EXPECT_DOUBLE_EQ(*ptr, 1.567);
@@ -84,6 +83,7 @@ TEST(HW4Test, TEST9) {
     delete tmp;
 }
 
+/*
 TEST(HW4Test, TEST10) {
     SharedPtr<int> ptr1{new int{10}};
     EXPECT_EQ(*ptr1.get(), 10);
