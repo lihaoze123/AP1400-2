@@ -169,7 +169,6 @@ TEST(HW4Test, TEST17) {
     EXPECT_FALSE(ptr3->empty());
 }
 
-/*
 TEST(HW4Test, TEST18) {
     SharedPtr<std::string> ptr{new std::string{"hello world!"}};
     EXPECT_EQ(ptr->length(), 12);
@@ -194,6 +193,7 @@ TEST(HW4Test, TEST20) {
     EXPECT_FALSE(ptr);
 }
 
+/*
 TEST(HW4Test, TEST21) {
     SharedPtr<double> ptr1{new double{1.567}};
     SharedPtr<double> ptr2{new double{5.1234}};

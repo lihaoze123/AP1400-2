@@ -20,6 +20,8 @@ public:
         ++ (*_use);
     }
 
+    SharedPtr& operator=(const SharedPtr& shared_ptr) = default;
+
     ~SharedPtr() {
         if (_use != nullptr && -- (*_use) == 0) {
             delete _p;
@@ -30,6 +32,9 @@ public:
         _use = new size_t{0};
     }
 
+    T& operator*() const { return *_p; }
+    T* operator->() const { return &this->operator*(); }
+
     T* get() const {
         return _p;
     }
@@ -37,9 +42,14 @@ public:
     size_t& use_count() const {
         return *_use;
     }
+    
+    void reset(T* ptr = nullptr) {
+        this->~SharedPtr();
+        _p = ptr;
+        _use = new size_t{ptr != nullptr};
+    }
 
-    T& operator*() const { return *_p; }
-    T* operator->() const { return &this->operator*(); }
+    operator bool() const { return _p == nullptr; }
 };
 
 template <typename T>
