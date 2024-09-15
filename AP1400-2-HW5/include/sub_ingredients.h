@@ -15,6 +15,7 @@ public: \
     } \
      \
     virtual std::string get_name() const { return this->name; } \
+    virtual Ingredient* copy() const { return new __NAME{*this}; } \
 }
 
 DEFCLASS(Cinnamon, 5);

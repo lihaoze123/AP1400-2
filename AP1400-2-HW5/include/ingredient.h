@@ -12,6 +12,8 @@ public:
     virtual double price() const {
         return get_price_unit() * get_units();
     }
+
+    virtual Ingredient* copy() const = 0;
     
 
 protected:
