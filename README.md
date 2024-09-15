@@ -6,6 +6,6 @@ My solution of homework of Amirkabir University of Technology 1400-2: Advanced P
 - [x] HW2: Implement a program that simulates the execution process of a cryptocurrency client/server
 - [x] HW3: Implements a Binary Search Tree (BST)
 - [x] HW4: Implements **shared_ptr** and **unique_ptr** smart pointers in C++
-- [ ] HW5: Implement multiple classes using inheritance and polymorphism
+- [x] HW5: Implement multiple classes using inheritance and polymorphism
 - [ ] HW6: Solve 4 problems using the STL library
 - [ ] HW7: A python project
