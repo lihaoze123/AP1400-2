@@ -8,7 +8,6 @@
 #include "q3.h"
 #include "q4.h"
 
-/*
 TEST(HW6Test, TEST1) {
     auto min1 = q1::gradient_descent(0.01, 0.1, cos);
     EXPECT_NEAR(min1, 3.14, 0.1);
@@ -17,6 +16,7 @@ TEST(HW6Test, TEST1) {
     EXPECT_NEAR(min2, 3.14, 0.01);
 }
 
+/*
 TEST(HW6Test, TEST2) {
     auto min = q1::gradient_descent(0.01, 0.01, [](double a){return sin(a)+cos(a);});
     EXPECT_NEAR(min, -2.36, 0.01);
