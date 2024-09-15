@@ -9,7 +9,12 @@ EspressoBased::EspressoBased(const EspressoBased& esp) {
 }
 
 void EspressoBased::operator=(const EspressoBased &esp) {
+    if (this == &esp)
+        return;
+
     name = esp.name;
+
+    ingredients.clear();
 
     for (const auto& i : esp.ingredients)
         ingredients.push_back(i->copy());

@@ -92,7 +92,6 @@ TEST(HW5Test, TEST9) {
     EXPECT_EQ(equal.price(), 57);
 }
 
-/*
 TEST(HW5Test, TEST10) {
     Mocha mocha{};
     EXPECT_EQ(mocha.get_name(), "Mocha");
@@ -121,8 +120,3 @@ TEST(HW5Test, TEST12) {
     Mocha mocha{};
     mocha.brew();
 }
-*/
-
-
-
-

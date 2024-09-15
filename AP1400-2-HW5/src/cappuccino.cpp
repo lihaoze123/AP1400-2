@@ -20,7 +20,12 @@ Cappuccino::~Cappuccino() {
 }
 
 void Cappuccino::operator=(const Cappuccino &cap) {
+    if (this == &cap)
+        return;
+
     EspressoBased::operator=(cap);
+
+    side_items.clear();
     for (const auto& i : cap.side_items)
         side_items.push_back(i->copy());
 }
