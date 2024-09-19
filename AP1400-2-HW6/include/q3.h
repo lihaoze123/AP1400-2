@@ -41,7 +41,7 @@ namespace q3 {
         return hours * 60 + minutes;
     }
 
-    inline Flight read_flight(std::istream& is) {
+    inline Flight get_flight(std::istream& is) {
         if (is.fail() || is.bad() || is.eof())
             return Flight{};
 
@@ -82,7 +82,7 @@ namespace q3 {
         std::ifstream fs(filename);
 
         Flight flight;
-        while (flight = read_flight(fs), flight != Flight{})
+        while (flight = get_flight(fs), flight != Flight{})
             res.push(flight);
 
         return res;
